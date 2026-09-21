@@ -78,7 +78,7 @@
             gap: 15px;
         }
 
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 12px 15px;
             background-color: #0f172a;
@@ -90,18 +90,18 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, textarea:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #38bdf8;
         }
 
         textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         button {
-            background-color: #38bdf8;
-            color: #0f172a;
+            background-color: #ef4444;
+            color: #fff;
             border: none;
             padding: 14px;
             font-size: 1.1rem;
@@ -112,8 +112,7 @@
         }
 
         button:hover {
-            background-color: #0284c7;
-            color: #fff;
+            background-color: #dc2626;
         }
 
         button:active {
@@ -159,7 +158,7 @@
 <body>
 
     <header>
-        <h1>موقع إدمان الرسمى</h1>
+        <h1>موقع إدمان الرسمي</h1>
         <p>تواصل معنا واستكشف شروحات الأمن والنصائح الفنية</p>
     </header>
 
@@ -178,20 +177,29 @@
 ــــــــــــــــــــــــــــــــــــــــــــ</div>
         </div>
 
-        <!-- نموذج التواصل المباشر -->
+        <!-- نموذج إرسال البلاغ إلى بريد واتساب -->
         <div class="card">
-            <h2>📩 تواصل معنا عبر البريد</h2>
-            <form id="emailForm">
+            <h2>🚨 إرسال بلاغ/مشكلة لدعم واتساب</h2>
+            <form id="reportForm">
                 <input type="text" id="userName" placeholder="اسمك" required>
-                <input type="email" id="userEmail" placeholder="إيميلك الشخصي" required>
-                <textarea id="userMessage" placeholder="اكتب رسالتك هنا..." required></textarea>
-                <button type="button" onclick="sendViaMailto()">إرسال الرسالة عبر تطبيق البريد</button>
+                <input type="tel" id="userPhone" placeholder="الرقم المراد الإبلاغ عنه أو حسابه (مثال: 2010xxxxxxx+)" required>
+                
+                <select id="issueType" required>
+                    <option value="" disabled selected>اختر نوع المشكلة...</option>
+                    <option value="حظر حساب أو رقم">حظر حساب أو رقم</option>
+                    <option value="سرقة / اختراق رقم">سرقة / اختراق رقم</option>
+                    <option value="بلاغ عن انتهاك أو مضايقة">بلاغ عن انتهاك أو مضايقة</option>
+                    <option value="مشكلة في كود التحقق">مشكلة في كود التحقق</option>
+                </select>
+
+                <textarea id="userMessage" placeholder="اكتب وصف المشكلة والتفاصيل..." required></textarea>
+                <button type="button" onclick="sendToWhatsAppEmail()">إرسال البلاغ فوراً عبر البريد</button>
             </form>
         </div>
 
         <!-- حقوقي وحساباتي الرسمية -->
         <div class="card">
-            <h2>🔗 الحقوق الحسابات الرسمية</h2>
+            <h2>🔗 الحقوق والحسابات الرسمية</h2>
             <div class="links-grid">
                 <a href="https://www.youtube.com/@Edman_haking-i4f" target="_blank" class="link-btn">قناة اليوتيوب</a>
                 <a href="https://t.me/youssef7_HAKER" target="_blank" class="link-btn">قناة التليجرام</a>
@@ -206,24 +214,36 @@
     </footer>
 
     <script>
-        function sendViaMailto() {
-            // ضع بريد الشركة/الخاص بك هنا
-            const companyEmail = "your-company-email@gmail.com"; 
+        function sendToWhatsAppEmail() {
+            // إيميل دعم واتساب الرسمي
+            const whatsappSupportEmail = "support@whatsapp.com";
 
             const name = document.getElementById('userName').value;
-            const email = document.getElementById('userEmail').value;
+            const phone = document.getElementById('userPhone').value;
+            const issue = document.getElementById('issueType').value;
             const message = document.getElementById('userMessage').value;
 
-            if(!name || !email || !message) {
-                alert("يرجى ملء جميع الحقول أولاً");
+            if(!name || !phone || !issue || !message) {
+                alert("يرجى ملء جميع الخانات أولاً");
                 return;
             }
 
-            const subject = encodeURIComponent(`رسالة جديدة من: ${name}`);
-            const body = encodeURIComponent(`الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\nالرسالة:\n${message}`);
+            // تجهيز عنوان الرسالة
+            const subject = encodeURIComponent(`بلاغ مشكلة واتساب: ${issue} - الرقم: ${phone}`);
 
-            // فتح تطبيق البريد الخاص بالمستخدم
-            window.location.href = `mailto:${companyEmail}?subject=${subject}&body=${body}`;
+            // تجهيز محتوى الرسالة بالكامل
+            const bodyContent = `مرحباً فريق دعم واتساب،\n\n` +
+                                `أود الإبلاغ عن المشكلة التالية:\n\n` +
+                                `👤 اسم صاحب البلاغ: ${name}\n` +
+                                `📱 الرقم المستهدف/المعني: ${phone}\n` +
+                                `⚠️ نوع المشكلة: ${issue}\n\n` +
+                                `📝 التفاصيل والشرح:\n${message}\n\n` +
+                                `يرجى المتابعة والرد في أقرب وقت. شكراً لكم.`;
+
+            const encodedBody = encodeURIComponent(bodyContent);
+
+            // فتح تطبيق البريد وتجهيز الرسالة تلقائياً
+            window.location.href = `mailto:${whatsappSupportEmail}?subject=${subject}&body=${encodedBody}`;
         }
     </script>
 
