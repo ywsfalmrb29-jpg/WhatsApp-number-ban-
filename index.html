@@ -3,645 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الدعم الفني والحماية | إدمان البرمجيات</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>إدمان - Edman</title>
     <style>
-        :root {
-            --bg-primary: #0b0f19;
-            --bg-secondary: #111827;
-            --bg-card: #1f2937;
-            --accent-green: #10b981;
-            --accent-cyan: #06b6d4;
-            --accent-glow: rgba(16, 185, 129, 0.25);
-            --text-primary: #f9fafb;
-            --text-secondary: #9ca3af;
-            --border-color: #374151;
-            --radius-lg: 16px;
-            --radius-md: 10px;
-            --font-main: 'Cairo', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: var(--font-main);
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 60px;
         }
 
-        /* Top Bar Header */
         header {
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 12px 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .header-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header h1 {
+            color: #38bdf8;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
         }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            text-decoration: none;
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
         }
 
-        .brand-logo i {
-            color: var(--accent-green);
-            font-size: 1.4rem;
-        }
-
-        .brand-badge {
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 900;
-            padding: 2px 8px;
-            border-radius: 20px;
-            text-transform: uppercase;
-        }
-
-        /* Main Container */
-        main {
-            flex: 1;
+        .container {
             max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px 16px 100px 16px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
-        /* Section Tab Visibility System */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.35s ease-in-out;
+        .card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Banner */
-        .hero-card {
-            background: linear-gradient(135deg, rgba(31, 41, 55, 0.8), rgba(17, 24, 39, 0.9));
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan));
-        }
-
-        .hero-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Form Styling */
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .form-label i {
-            color: var(--accent-green);
-            margin-left: 6px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-control {
-            width: 100%;
-            background: var(--bg-secondary);
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 14px 16px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            outline: none;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-
-        textarea.form-control {
-            min-height: 140px;
-            resize: vertical;
-            line-height: 1.6;
-        }
-
-        .country-code-notice {
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Submit Button */
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, var(--accent-green), #059669);
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 1.05rem;
-            padding: 16px;
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px var(--accent-glow);
-            transition: all 0.2s ease;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-
-        /* Developer Info Tab */
-        .dev-profile {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .avatar-box {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px auto;
-            font-size: 2.5rem;
-            color: #000;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .dev-name {
+        .card h2 {
+            color: #38bdf8;
+            margin-bottom: 15px;
             font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 4px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
         }
 
-        .dev-title {
-            color: var(--accent-green);
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .bio-box {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .tech-tag {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent-green);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            font-family: var(--font-code);
-        }
-
-        /* Guide Steps Content */
-        .step-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px;
-            margin-bottom: 14px;
-            position: relative;
-        }
-
-        .step-num {
-            display: inline-block;
-            background: var(--accent-green);
-            color: #000;
-            font-weight: 900;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 28px;
-            font-size: 0.85rem;
-            margin-left: 8px;
-        }
-
-        .step-title {
-            font-weight: 700;
+        .security-content {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid #ef4444;
+            white-space: pre-wrap;
             font-size: 1rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
+            color: #cbd5e1;
+            line-height: 1.8;
         }
 
-        .step-desc {
-            color: var(--text-secondary);
-            font-size: 0.88rem;
-            line-height: 1.7;
-        }
-
-        .highlight-box {
-            background: rgba(6, 182, 212, 0.1);
-            border-right: 3px solid var(--accent-cyan);
-            padding: 10px 14px;
-            margin-top: 10px;
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-            font-size: 0.83rem;
-            color: var(--text-primary);
-        }
-
-        /* Bottom Fixed Navigation Bar (3 Tabs) */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(17, 24, 39, 0.95);
-            backdrop-filter: blur(16px);
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            z-index: 1000;
-        }
-
-        .nav-item {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
+        form {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            gap: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #38bdf8;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            width: 33.33%;
-            padding: 6px 0;
-            transition: all 0.2s ease;
+            transition: background-color 0.3s, transform 0.1s;
         }
 
-        .nav-item i {
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
+        button:hover {
+            background-color: #0284c7;
+            color: #fff;
         }
 
-        .nav-item.active {
-            color: var(--accent-green);
+        button:active {
+            transform: scale(0.98);
         }
 
-        .nav-item.active i {
-            transform: translateY(-2px);
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
         }
 
-        /* Footer Copyright */
-        .footer-text {
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background-color: #0f172a;
+            color: #38bdf8;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid #38bdf8;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .link-btn:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        footer {
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            margin-top: 30px;
-            font-family: var(--font-code);
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Top Bar -->
     <header>
-        <div class="header-container">
-            <a href="#" class="brand-logo">
-                <i class="fa-solid fa-shield-halved"></i>
-                إدمان للبرمجيات
-            </a>
-            <span class="brand-badge">إصدار V2.0</span>
-        </div>
+        <h1>موقع إدمان الرسمى</h1>
+        <p>تواصل معنا واستكشف شروحات الأمن والنصائح الفنية</p>
     </header>
 
-    <!-- Main Content Area -->
-    <main>
+    <div class="container">
 
-        <!-- TAB 1: RIGHT - RIGHTS & DEVELOPER (حقوق المبرمج) -->
-        <section id="tab-rights" class="tab-content">
-            <div class="form-card dev-profile">
-                <div class="avatar-box">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <h2 class="dev-name">يوسف (إدمان)</h2>
-                <p class="dev-title">مطور تطبيقات وبوابات أمان برمجية</p>
-                
-                <div class="bio-box">
-                    أهلاً بك! تم تصميم وتطوير هذه المنصة بالكامل بواسطة <strong>المبرمج إدمان</strong> باستخدام أحدث تقنيات الويب المتقدمة. يهدف هذا المشروع إلى توفير حلول برمجية ذكية وتسهيل التواصل مع فرق الدعم الفني لحماية المستندات والبيانات الرقمية بأسلوب احترافي ومعايير دقيقة.
-                </div>
+        <!-- قائمة الأمن -->
+        <div class="card">
+            <h2>🛡️ قسم الأمن والتوعية</h2>
+            <div class="security-content">❌ طبعاً الطريقة دي شغالة على الأرقام الحقيقية والوهمية، وكده هيكون في تعديل على طريقة المحافظة على الأرقام الوهمية، والتعديل هو كالتالي يا قلب إدمان👇يرجى الانتباه:
 
-                <div class="tech-tags">
-                    <span class="tech-tag">HTML5 / CSS3</span>
-                    <span class="tech-tag">JavaScript ES6</span>
-                    <span class="tech-tag">Sketchware Pro</span>
-                    <span class="tech-tag">Python Tools</span>
-                    <span class="tech-tag">UI/UX Mobile Design</span>
-                </div>
-            </div>
-        </section>
+(عشان تحافظ على رقمك الوهمي ومتخليش حد يسحبه منك، اعمل عليه إرسال رسالة نصية واتصال بيه من غير ما تعمل أي كود تحقق، وبعد كثرة طلب للاتصالات والرسائل على رقمك وبدون ما تسوي كود غلط ولا حاجة، واتساب مش بتقبل تعمل اتصال بيه أو إرسال رسالة بالكود حتى بعد سنة كاملة، وتضمن إن الرقم متوقف ومش عليه أي نشاط علشان يتم تفعيله في واتساب).
 
-        <!-- TAB 2: CENTER - HOME & FORM (الرئيسية والإرسال) -->
-        <section id="tab-home" class="tab-content active">
-            <div class="hero-card">
-                <h1 class="hero-title">
-                    <i class="fa-solid fa-paper-plane" style="color: var(--accent-green);"></i>
-                    مركز إرسال الطلبات والبلاغات
-                </h1>
-                <p class="hero-subtitle">
-                    أدخل رقم الهاتف المعني وتفاصيل مشكلتك، وسيتم تحويل المضمون تلقائياً بتنسيق رسمي مباشر إلى بريد الدعم الفني دون الحاجة لكتابة القوالب يدوياً.
-                </p>
-            </div>
-
-            <div class="form-card">
-                <form id="supportForm" onsubmit="handleFormSubmit(event)">
-                    
-                    <!-- Phone Number Input -->
-                    <div class="form-group">
-                        <label class="form-label" for="phoneNumber">
-                            <i class="fa-solid fa-phone"></i>
-                            رقم الهاتف المتربط بالمشكلة
-                        </label>
-                        <div class="input-wrapper">
-                            <input 
-                                type="tel" 
-                                id="phoneNumber" 
-                                class="form-control" 
-                                placeholder="مثال: +201234567890" 
-                                dir="ltr" 
-                                required
-                            >
-                        </div>
-                        <div class="country-code-notice">
-                            <i class="fa-solid fa-circle-info"></i>
-                            يرجى إضافة رمز الدولة مع العلامة (+) في البداية (مثال: 20+ لمصر).
-                        </div>
-                    </div>
-
-                    <!-- Problem Description Textarea -->
-                    <div class="form-group">
-                        <label class="form-label" for="issueDetails">
-                            <i class="fa-solid fa-align-right"></i>
-                            تفاصيل وتوصيف المشكلة
-                        </label>
-                        <textarea 
-                            id="issueDetails" 
-                            class="form-control" 
-                            placeholder="اكتب شرحاً دقيقاً ومفصلاً للمشكلة أو نوع البلاغ المراد توجيهه إلى فريق الدعم..." 
-                            required
-                        ></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-envelope-circle-check"></i>
-                        توليد وتوجيه الرسالة للدعم الفني
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- TAB 3: LEFT - GUIDE & PROTECTION (طرق الحماية وتفعيل الأمان) -->
-        <section id="tab-guide" class="tab-content">
-            <div class="hero-card">
-                <h2 class="hero-title">
-                    <i class="fa-solid fa-shield-cat" style="color: var(--accent-cyan);"></i>
-                    دليل حماية وتأمين الحسابات
-                </h2>
-                <p class="hero-subtitle">
-                    خطوات واستراتيجيات متقدمة مقدمة من المبرمج إدمان لحماية الحساب الأسبوعية ومنع محاولات التعطيل أو تخمين كود التحقق.
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-num">1</span>
-                    تفعيل التحقق بخطوتين (Two-Step Verification)
-                </div>
-                <div class="step-desc">
-                    قم بفتح إعدادات الحساب > الأمان > التحقق بخطوتين. أنشئ رمز PIN مكون من 6 أرقام لا يعلمه غيرك، وأضف بريدك الإلكتروني الشخصي لاستعادة الرمز في حال نسيا نه.
-                </div>
-                <div class="highlight-box">
-                    💡 <strong>فائدة برمجية:</strong> يمنع هذا الرمز أي طرف غريب من تفعيل حسابك حتى لو استطاع الوصول إلى كود الـ SMS.
-                </div>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-num">2</span>
-                    التعامل مع ظاهرة تخمين كود التحقق
-                </div>
-                <div class="step-desc">
-                    عند وصول محاولات دخيلة لإدخال كود تحقق خاطئ متكرر، تجنب طلب أكواد جديدة فوراً عبر الـ SMS، وانتظر حتى انتهاء المهلة الزمنية المؤقتة المحددة من الشركة.
-                </div>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">
-                    <span class="step-num">3</span>
-                    التبليغ الرسمي الفوري
-                </div>
-                <div class="step-desc">
-                    استخدم نموذج الإرسال المباشر في الصفحة الرئيسية لهذه المنصة للتواصل السريع مع الدعم الفني لحسم أي نزاع أو توثيق ملكية الشريحة برسمية.
-                </div>
-            </div>
-        </section>
-
-        <div class="footer-text">
-            حقوق التطوير والبرمجة محفوظة © المبرمج إدمان
+وكده اكون قلتلكم طريقة حماية الأرقام الحقيقية وتطيرها وكمان المحافظة على رقمك الوهمي👍 أو الحقيقي👍
+اشكروووني بقااا # إدمان
+والله أنا تعبت من عمل التطبيق ده
+ــــــــــــــــــــــــــــــــــــــــــــ</div>
         </div>
 
-    </main>
+        <!-- نموذج التواصل المباشر -->
+        <div class="card">
+            <h2>📩 تواصل معنا عبر البريد</h2>
+            <form id="emailForm">
+                <input type="text" id="userName" placeholder="اسمك" required>
+                <input type="email" id="userEmail" placeholder="إيميلك الشخصي" required>
+                <textarea id="userMessage" placeholder="اكتب رسالتك هنا..." required></textarea>
+                <button type="button" onclick="sendViaMailto()">إرسال الرسالة عبر تطبيق البريد</button>
+            </form>
+        </div>
 
-    <!-- Bottom Fixed Navigation (3 Tabs) -->
-    <nav class="bottom-nav">
-        <!-- Right Tab: Rights -->
-        <button class="nav-item" onclick="switchTab('tab-rights', this)">
-            <i class="fa-solid fa-user-gear"></i>
-            الحقوق والمبرمج
-        </button>
+        <!-- حقوقي وحساباتي الرسمية -->
+        <div class="card">
+            <h2>🔗 الحقوق الحسابات الرسمية</h2>
+            <div class="links-grid">
+                <a href="https://www.youtube.com/@Edman_haking-i4f" target="_blank" class="link-btn">قناة اليوتيوب</a>
+                <a href="https://t.me/youssef7_HAKER" target="_blank" class="link-btn">قناة التليجرام</a>
+                <a href="https://ywsfalmrb29-jpg.github.io/LEARN_HACK_EDMAN/" target="_blank" class="link-btn">الموقع الرسمي</a>
+            </div>
+        </div>
 
-        <!-- Center Tab: Home (Active Default) -->
-        <button class="nav-item active" onclick="switchTab('tab-home', this)">
-            <i class="fa-solid fa-house"></i>
-            الرئيسية والبلاغات
-        </button>
+    </div>
 
-        <!-- Left Tab: Protection Guide -->
-        <button class="nav-item" onclick="switchTab('tab-guide', this)">
-            <i class="fa-solid fa-lock"></i>
-            طرق الحماية
-        </button>
-    </nav>
+    <footer>
+        جميع الحقوق محفوظة © إدمان - Edman
+    </footer>
 
-    <!-- Navigation & Dynamic Mailto Logic -->
     <script>
-        // Tab Switcher Logic
-        function switchTab(tabId, btnElement) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+        function sendViaMailto() {
+            // ضع بريد الشركة/الخاص بك هنا
+            const companyEmail = "your-company-email@gmail.com"; 
 
-            // Deactivate all nav buttons
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const message = document.getElementById('userMessage').value;
 
-            // Show selected tab and set button active
-            document.getElementById(tabId).classList.add('active');
-            btnElement.classList.add('active');
-
-            // Scroll to top smoothly
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Form Handler & Dynamic Mailto Redirection
-        function handleFormSubmit(event) {
-            event.preventDefault();
-
-            const phoneInput = document.getElementById('phoneNumber').value.trim();
-            const detailsInput = document.getElementById('issueDetails').value.trim();
-
-            if (!phoneInput || !detailsInput) {
-                alert('يرجى ملء جميع الحقول المطلوب إدخالها.');
+            if(!name || !email || !message) {
+                alert("يرجى ملء جميع الحقول أولاً");
                 return;
             }
 
-            // Target Support Email
-            const supportEmail = "support@whatsapp.com";
+            const subject = encodeURIComponent(`رسالة جديدة من: ${name}`);
+            const body = encodeURIComponent(`الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\nالرسالة:\n${message}`);
 
-            // Subject Line
-            const emailSubject = "طلب دعم فني وبلاغ بشأن رقم هاتف: " + phoneInput;
-
-            // Formatted Email Body Text
-            const emailBody = 
-                "فريق الدعم الفني المحترم،
-
-" +
-                "أود تقديم بلاغ / طلب دعم فني عاجل يخص رقم الهاتف التالي:
-" +
-                "رقم الهاتف: " + phoneInput + "
-
-" +
-                "تفاصيل وقائع المشكلة:
-" +
-                detailsInput + "
-
-" +
-                "يرجى مراجعة الطلب واتخاذ الإجراءات اللازمة.
-" +
-                "شاكرين حسن تعاونكم ومساعدتكم.
-
-" +
-                "--- تم توليد الرسالة عبر منصة إدمان للبرمجيات ---";
-
-            // Construct Universal Mailto URL with Safe UTF-8 Encoding
-            const mailtoUrl = "mailto:" + encodeURIComponent(supportEmail) +
-                "?subject=" + encodeURIComponent(emailSubject) +
-                "&body=" + encodeURIComponent(emailBody);
-
-            // Trigger Email Application
-            window.location.href = mailtoUrl;
+            // فتح تطبيق البريد الخاص بالمستخدم
+            window.location.href = `mailto:${companyEmail}?subject=${subject}&body=${body}`;
         }
     </script>
+
 </body>
 </html>
